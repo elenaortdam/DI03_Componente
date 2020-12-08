@@ -5,12 +5,16 @@
  */
 package componente;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Date;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
 /**
  *
@@ -18,59 +22,57 @@ import javax.swing.JLabel;
  */
 public class FechaHoraDigital extends JLabel implements Serializable {
 
+    private JLabel fechaHora;
     private boolean formato24h;
 
-    private String fechaHora;
-    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
     public FechaHoraDigital() {
-        this.crearHora();
+        //   setLayout(new BorderLayout());
+        fechaHora = new JLabel();
+        fechaHora.setHorizontalAlignment(JLabel.CENTER);
+        //fechaHora.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 48f));
+        actualizarReloj();
+        //add(fechaHora);
 
-        // Timer t = new Timer(1000, this);
-        //t.start();
+        Timer timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarReloj();
+            }
+        });
+        timer.setRepeats(true);
+        timer.setCoalesce(true);
+        timer.setInitialDelay(0);
+        timer.start();
     }
 
-    private void crearHora() {
+    public void actualizarReloj() {
 
         Calendar calendario = Calendar.getInstance();
-        int day, month, year;
 
-        day = calendario.get(Calendar.DAY_OF_MONTH);
-        month = calendario.get(Calendar.MONTH);
-        year = calendario.get(Calendar.YEAR);
-        String fecha = day + "/" + month + "/" + year;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        if (!formato24h) {
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
+        }
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                int seconds, minutes, hours;
-                //verificamos si el formato de la hora debe ser 24 horas o 12 horas
-                if (formato24h == true) {
-                    hours = calendario.get(Calendar.HOUR_OF_DAY);
-                } else {
-                    hours = calendario.get(Calendar.HOUR);
-                }
-                //almacenamos los minutos y segundos del sistema en las variables.
-                minutes = calendario.get(Calendar.MINUTE);
-                seconds = calendario.get(Calendar.SECOND);
+        String datefinal = dateFormat.format(calendario.getTime());
+        // this.setText(fechaHora);
+        this.setText(datefinal);
+    }
 
-                //establecemos el texto del componente, evaluaremos si se ha seleccionado formato horario de 24 horas o 12 horas.
-                //en el caso de ser formato 12 horas, usamos la instancia de la clase calendar para saber si es am o pm
-                String hora = Integer.toString(hours) + ":" + Integer.toString(minutes) + ":" + Integer.toString(seconds);
-                fechaHora = fecha + " " + hora;
-                if (!formato24h) {
-                    if (calendario.get(Calendar.AM_PM) == 0) {
-                        hora += " A.M";
-                    } else {
-                        hora += " P.M";
-                    }
-                }
-            }
+    public JLabel getFechaHora() {
+        return fechaHora;
+    }
 
-        }, 0, 1000);
-        this.setText(fechaHora);
+    public void setFechaHora(JLabel fechaHora) {
+        this.fechaHora = fechaHora;
+    }
 
+    public boolean isFormato24h() {
+        return formato24h;
+    }
+
+    public void setFormato24h(boolean formato24h) {
+        this.formato24h = formato24h;
     }
 
 }

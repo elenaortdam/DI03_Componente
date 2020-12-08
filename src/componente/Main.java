@@ -16,7 +16,7 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        FechaHoraDigital1 reloj = new FechaHoraDigital1();
+        FechaHoraDigital reloj = new FechaHoraDigital();
   
         
         // TODO code application logic here
