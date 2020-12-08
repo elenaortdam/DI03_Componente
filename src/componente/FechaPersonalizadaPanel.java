@@ -43,7 +43,6 @@ public class FechaPersonalizadaPanel extends JPanel implements Serializable {
 
         jDateChooser = new com.toedter.calendar.JDateChooser();
         labelFecha = new javax.swing.JLabel();
-        TituloPropiedad = new javax.swing.JLabel();
         horaCompletaLabel = new javax.swing.JLabel();
         horaSpinner = new javax.swing.JSpinner();
         horaLabel = new javax.swing.JLabel();
@@ -54,9 +53,6 @@ public class FechaPersonalizadaPanel extends JPanel implements Serializable {
 
         labelFecha.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelFecha.setText("Fecha ejecución:");
-
-        TituloPropiedad.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        TituloPropiedad.setText("Ejecutar Programa");
 
         horaCompletaLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         horaCompletaLabel.setText("Hora ejecución:");
@@ -82,30 +78,24 @@ public class FechaPersonalizadaPanel extends JPanel implements Serializable {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(horaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(horaSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(horaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(minutoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(minutoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(minutoLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(segundoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(segundoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(segundoLabel))
                     .addComponent(jDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(22, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TituloPropiedad)
-                .addGap(121, 121, 121))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(TituloPropiedad)
-                .addGap(18, 18, 18)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelFecha, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -124,7 +114,6 @@ public class FechaPersonalizadaPanel extends JPanel implements Serializable {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel TituloPropiedad;
     private javax.swing.JLabel horaCompletaLabel;
     private javax.swing.JLabel horaLabel;
     private javax.swing.JSpinner horaSpinner;

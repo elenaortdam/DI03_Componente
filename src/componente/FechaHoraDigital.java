@@ -7,6 +7,8 @@ package componente;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,6 +23,7 @@ public class FechaHoraDigital extends JLabel implements Serializable {
 
     private JLabel fechaHora;
     private boolean formato24h;
+    private File filePath;
     private FechaPersonalizada fechaEjecucion;
 
     public FechaHoraDigital() {
@@ -35,7 +38,7 @@ public class FechaHoraDigital extends JLabel implements Serializable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 actualizarReloj();
-             //   ejecutarPrograma();
+                ejecutarPrograma();
             }
         });
         timer.setRepeats(true);
@@ -57,23 +60,32 @@ public class FechaHoraDigital extends JLabel implements Serializable {
         this.setText(datefinal);
     }
 
-    private void ejecutarPrograma() {
-        /*
+    public void ejecutarPrograma() {
+
         //Si alguno de los campos es nulo no hacemos nada
-        if (fechaEjecucion == null || programaEjecutado == null) {
+        if (fechaEjecucion == null || filePath == null) {
             return;
         }
-        long fechaActual = Calendar.getInstance().getTimeInMillis();
-   //     long fechaEjecucionPrograma = fechaEjecucion.getCalendar().getTimeInMillis();
-      //  if (fechaActual == fechaEjecucionPrograma) {
-            Runtime programa = Runtime.getRuntime();
-            try {
-                programa.exec(programaEjecutado.getAbsolutePath());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-       // }
-*/
+        Calendar ejecucionPrograma = fechaEjecucion.getCalendar();
+       // Calendar fechaActual = Calendar.getInstance();
+        Calendar fechaActual = Calendar.getInstance();
+        if (ejecucionPrograma.get(Calendar.YEAR) != fechaActual.get(Calendar.YEAR)
+                || ejecucionPrograma.get(Calendar.MONTH) != fechaActual.get(Calendar.MONTH)
+                || ejecucionPrograma.get(Calendar.DAY_OF_MONTH) != fechaActual.get(Calendar.DAY_OF_MONTH)) {
+            return;
+        }
+        if (ejecucionPrograma.get(Calendar.HOUR_OF_DAY) != fechaActual.get(Calendar.HOUR_OF_DAY)
+                || ejecucionPrograma.get(Calendar.MINUTE) != fechaActual.get(Calendar.MINUTE)) {
+            return;
+        }
+
+        Runtime programa = Runtime.getRuntime();
+        try {
+            programa.exec(filePath.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public JLabel getFechaHora() {
@@ -98,5 +110,13 @@ public class FechaHoraDigital extends JLabel implements Serializable {
 
     public void setFechaEjecucion(FechaPersonalizada fechaEjecucion) {
         this.fechaEjecucion = fechaEjecucion;
+    }
+
+    public File getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(File filePath) {
+        this.filePath = filePath;
     }
 }
