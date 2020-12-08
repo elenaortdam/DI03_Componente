@@ -8,11 +8,8 @@ package componente;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
@@ -24,6 +21,7 @@ public class FechaHoraDigital extends JLabel implements Serializable {
 
     private JLabel fechaHora;
     private boolean formato24h;
+    private FechaPersonalizada fechaEjecucion;
 
     public FechaHoraDigital() {
         //   setLayout(new BorderLayout());
@@ -37,6 +35,7 @@ public class FechaHoraDigital extends JLabel implements Serializable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 actualizarReloj();
+             //   ejecutarPrograma();
             }
         });
         timer.setRepeats(true);
@@ -55,8 +54,26 @@ public class FechaHoraDigital extends JLabel implements Serializable {
         }
 
         String datefinal = dateFormat.format(calendario.getTime());
-        // this.setText(fechaHora);
         this.setText(datefinal);
+    }
+
+    private void ejecutarPrograma() {
+        /*
+        //Si alguno de los campos es nulo no hacemos nada
+        if (fechaEjecucion == null || programaEjecutado == null) {
+            return;
+        }
+        long fechaActual = Calendar.getInstance().getTimeInMillis();
+   //     long fechaEjecucionPrograma = fechaEjecucion.getCalendar().getTimeInMillis();
+      //  if (fechaActual == fechaEjecucionPrograma) {
+            Runtime programa = Runtime.getRuntime();
+            try {
+                programa.exec(programaEjecutado.getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+       // }
+*/
     }
 
     public JLabel getFechaHora() {
@@ -75,4 +92,11 @@ public class FechaHoraDigital extends JLabel implements Serializable {
         this.formato24h = formato24h;
     }
 
+    public FechaPersonalizada getFechaEjecucion() {
+        return fechaEjecucion;
+    }
+
+    public void setFechaEjecucion(FechaPersonalizada fechaEjecucion) {
+        this.fechaEjecucion = fechaEjecucion;
+    }
 }
