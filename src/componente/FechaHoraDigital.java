@@ -5,6 +5,7 @@
  */
 package componente;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -25,11 +26,12 @@ public class FechaHoraDigital extends JLabel implements Serializable {
     private boolean formato24h;
     private File filePath;
     private FechaPersonalizada fechaEjecucion;
-
+    
     public FechaHoraDigital() {
         //   setLayout(new BorderLayout());
         fechaHora = new JLabel();
         fechaHora.setHorizontalAlignment(JLabel.CENTER);
+        //cargado.setBackground(Color.red);
         //fechaHora.setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD, 48f));
         actualizarReloj();
         //add(fechaHora);
@@ -51,7 +53,7 @@ public class FechaHoraDigital extends JLabel implements Serializable {
 
         Calendar calendario = Calendar.getInstance();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         if (!formato24h) {
             dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss aa");
         }
@@ -64,11 +66,15 @@ public class FechaHoraDigital extends JLabel implements Serializable {
 
         //Si alguno de los campos es nulo no hacemos nada
         if (fechaEjecucion == null || filePath == null) {
+            //this.cargado.setBackground(Color.red);
+          //  this.cargado.setText("NO CARGADO");
             return;
         }
         Calendar ejecucionPrograma = fechaEjecucion.getCalendar();
+       
        // Calendar fechaActual = Calendar.getInstance();
         Calendar fechaActual = Calendar.getInstance();
+       // fechaActual.set(2020, 11, 10, 00, 00);
         if (ejecucionPrograma.get(Calendar.YEAR) != fechaActual.get(Calendar.YEAR)
                 || ejecucionPrograma.get(Calendar.MONTH) != fechaActual.get(Calendar.MONTH)
                 || ejecucionPrograma.get(Calendar.DAY_OF_MONTH) != fechaActual.get(Calendar.DAY_OF_MONTH)) {
